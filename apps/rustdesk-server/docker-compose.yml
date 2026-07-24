@@ -1,0 +1,26 @@
+services:
+  rustdesk-server-hbbs:
+    image: rustdesk/rustdesk-server:1.1.16
+    command: hbbs
+    ports:
+      - ${NETWORK_INTERFACE:-0.0.0.0}:21115:21115/tcp
+      - ${NETWORK_INTERFACE:-0.0.0.0}:21116:21116/tcp
+      - ${NETWORK_INTERFACE:-0.0.0.0}:21116:21116/udp
+      - ${NETWORK_INTERFACE:-0.0.0.0}:21118:21118/tcp
+    volumes:
+      - ${APP_DATA_DIR}/data:/root
+    depends_on:
+      - rustdesk-server-hbbr
+    x-runtipi:
+      internal_port: 21115
+      is_main: true
+  rustdesk-server-hbbr:
+    image: rustdesk/rustdesk-server:1.1.16
+    command: hbbr
+    ports:
+      - ${NETWORK_INTERFACE:-0.0.0.0}:21117:21117/tcp
+      - ${NETWORK_INTERFACE:-0.0.0.0}:21119:21119/tcp
+    volumes:
+      - ${APP_DATA_DIR}/data:/root
+x-runtipi:
+  schema_version: 2

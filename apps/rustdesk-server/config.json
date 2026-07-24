@@ -1,0 +1,31 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "RustDesk Server",
+  "id": "rustdesk-server",
+  "available": true,
+  "exposable": false,
+  "short_desc": "Self-hosted remote desktop relay server.",
+  "author": "rustdesk",
+  "port": 21115,
+  "categories": ["utilities", "network"],
+  "description": "Self-hosted RustDesk server (hbbs ID/rendezvous server and hbbr relay server) for the RustDesk remote desktop client. Own your data with your own relay.",
+  "tipi_version": 1,
+  "version": "1.1.16",
+  "source": "https://github.com/rustdesk/rustdesk-server",
+  "website": "https://rustdesk.com",
+  "supported_architectures": ["arm64", "amd64"],
+  "requirements": {
+    "ports": [21115, 21116, 21117, 21118, 21119]
+  },
+  "form_fields": [
+    {
+      "type": "ip",
+      "label": "Network Interface (default: 0.0.0.0)",
+      "required": false,
+      "env_variable": "NETWORK_INTERFACE"
+    }
+  ],
+  "created_at": 1753401600000,
+  "updated_at": 1753401600000,
+  "min_tipi_version": "4.7.0"
+}
