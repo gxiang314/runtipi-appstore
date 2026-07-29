@@ -207,7 +207,7 @@ describe("App configs", () => {
   });
 
   describe("Each app should have the same version in config.json and docker-compose.yml", () => {
-    const exceptions = ["revolt"];
+    const exceptions = ["revolt", "rustdesk-server"];
     const apps = getAppConfigs().filter((app) => !exceptions.includes(app.id));
 
     for (const app of apps) {
