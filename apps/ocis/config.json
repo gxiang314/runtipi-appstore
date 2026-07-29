@@ -1,0 +1,33 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "ownCloud Infinite Scale",
+  "port": 9200,
+  "uid": 1000,
+  "gid": 1000,
+  "available": true,
+  "exposable": true,
+  "dynamic_config": true,
+  "id": "ocis",
+  "tipi_version": 1,
+  "version": "8.0.6",
+  "categories": ["data"],
+  "description": "ownCloud Infinite Scale (oCIS) is the next generation of ownCloud: a secure and scalable file sync & share platform rewritten in Go. Single binary, no PHP, no database required.",
+  "short_desc": "File sync & share platform, next generation of ownCloud.",
+  "author": "https://github.com/owncloud",
+  "source": "https://github.com/owncloud/ocis",
+  "website": "https://owncloud.dev/ocis/",
+  "form_fields": [
+    {
+      "type": "password",
+      "label": "Admin password (username: admin)",
+      "max": 50,
+      "min": 8,
+      "required": true,
+      "env_variable": "OCIS_ADMIN_PASSWORD"
+    }
+  ],
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1785367617000,
+  "updated_at": 1785367617000,
+  "min_tipi_version": "4.5.0"
+}

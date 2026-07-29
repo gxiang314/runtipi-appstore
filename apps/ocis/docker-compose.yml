@@ -1,0 +1,19 @@
+services:
+  ocis:
+    image: owncloud/ocis:8.0.6
+    entrypoint: /bin/sh
+    command: ['-c', 'ocis init || true; ocis server']
+    environment:
+      - OCIS_URL=${APP_PROTOCOL:-http}://${APP_DOMAIN}
+      - OCIS_INSECURE=true
+      - PROXY_TLS=false
+      - OCIS_LOG_LEVEL=error
+      - IDM_ADMIN_PASSWORD=${OCIS_ADMIN_PASSWORD}
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/etc/ocis
+      - ${APP_DATA_DIR}/data/ocis:/var/lib/ocis
+    x-runtipi:
+      internal_port: 9200
+      is_main: true
+x-runtipi:
+  schema_version: 2
