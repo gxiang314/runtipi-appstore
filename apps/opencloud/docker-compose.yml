@@ -1,0 +1,24 @@
+services:
+  opencloud:
+    image: opencloudeu/opencloud-rolling:7.3.0
+    user: 1000:1000
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - opencloud init || true; opencloud server
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/etc/opencloud
+      - ${APP_DATA_DIR}/data/data:/var/lib/opencloud
+    environment:
+      - OC_URL=https://${APP_DOMAIN}
+      - OC_INSECURE=true
+      - PROXY_TLS=false
+      - PROXY_HTTP_ADDR=0.0.0.0:9200
+      - OC_LOG_LEVEL=warn
+      - IDM_ADMIN_PASSWORD=${OPENCLOUD_ADMIN_PASSWORD}
+      - IDM_CREATE_DEMO_USERS=${OPENCLOUD_DEMO_USERS-false}
+    x-runtipi:
+      internal_port: 9200
+      is_main: true
+x-runtipi:
+  schema_version: 2

@@ -1,0 +1,41 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "OpenCloud",
+  "port": 8069,
+  "uid": 1000,
+  "gid": 1000,
+  "available": true,
+  "exposable": true,
+  "dynamic_config": true,
+  "id": "opencloud",
+  "tipi_version": 1,
+  "version": "7.3.0",
+  "categories": ["data", "utilities"],
+  "description": "OpenCloud is a modern, lightweight file sync and share platform written in Go. It is a fresh rewrite of the classic ownCloud stack: a single binary that bundles storage, a built-in OpenID Connect identity provider, a web UI and full WebDAV support, so it starts fast and stays light on resources. Sync files with the desktop and mobile clients, share links with permissions and expiry, collaborate on documents through Collabora or OnlyOffice, and keep everything on hardware you control. Note: OpenCloud must be exposed over HTTPS - its identity provider requires an https issuer URL.",
+  "short_desc": "Modern, lightweight file sync and share platform written in Go.",
+  "author": "OpenCloud GmbH",
+  "source": "https://github.com/opencloud-eu/opencloud",
+  "website": "https://opencloud.eu",
+  "form_fields": [
+    {
+      "type": "password",
+      "label": "Admin password",
+      "env_variable": "OPENCLOUD_ADMIN_PASSWORD",
+      "required": true,
+      "min": 8,
+      "hint": "Password for the built-in 'admin' account. Minimum 8 characters."
+    },
+    {
+      "type": "boolean",
+      "label": "Create demo users",
+      "env_variable": "OPENCLOUD_DEMO_USERS",
+      "required": false,
+      "default": false,
+      "hint": "Adds sample users (alan, mary, ...) for testing. Leave off for production."
+    }
+  ],
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1785364458514,
+  "updated_at": 1785364458514,
+  "min_tipi_version": "4.5.0"
+}
