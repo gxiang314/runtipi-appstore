@@ -20,7 +20,7 @@ It contains all the apps that are available for download on [Runtipi](https://gi
 
 > _Don't forget to read the [docs](https://runtipi.io/docs)_
 
-## Apps available (267)
+## Apps available (268)
 
 |                                   App                                   | Name                                                                         | Description                                                                                                                                                         |
 | :---------------------------------------------------------------------: | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -203,6 +203,7 @@ It contains all the apps that are available for download on [Runtipi](https://gi
 |        <img src="apps/open-webui/metadata/logo.jpg" width="32">         | [Open WebUI](https://github.com/open-webui/open-webui)                       | User-friendly WebUI for LLMs                                                                                                                                        |
 |         <img src="apps/openbooks/metadata/logo.jpg" width="32">         | [openbooks](https://github.com/evan-buss/openbooks)                          | Search and Download eBooks                                                                                                                                          |
 |         <img src="apps/openclaw/metadata/logo.jpg" width="32">          | [OpenClaw](https://github.com/openclaw/openclaw)                             | OpenClaw is a personal AI assistant you run on your own devices. It answers you on the channels you already use.                                                    |
+|         <img src="apps/opencloud/metadata/logo.jpg" width="32">         | [OpenCloud](https://github.com/opencloud-eu/opencloud)                       | Modern, lightweight file sync and share platform written in Go.                                                                                                     |
 |          <img src="apps/outline/metadata/logo.jpg" width="32">          | [Outline](https://github.com/outline/outline)                                | A home for all your docs                                                                                                                                            |
 |          <img src="apps/owncast/metadata/logo.jpg" width="32">          | [Owncast](https://github.com/owncast/owncast)                                | Take control over your live stream video by running it yourself. Streaming + chat out of the box.                                                                   |
 |         <img src="apps/owncloud/metadata/logo.jpg" width="32">          | [Owncloud](https://github.com/owncloud/core)                                 | A personal cloud which runs on your own server.                                                                                                                     |
