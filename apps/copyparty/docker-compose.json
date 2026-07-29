@@ -1,0 +1,41 @@
+{
+  "services": [
+    {
+      "name": "copyparty",
+      "image": "copyparty/ac:1.20.19",
+      "isMain": true,
+      "internalPort": 3923,
+      "command": [
+        "-a",
+        "${COPYPARTY_USER}:${COPYPARTY_PASSWORD}",
+        "-v",
+        "/w::rwmda,${COPYPARTY_USER}${COPYPARTY_ANON_ACCS}",
+        "-e2dsa",
+        "-e2ts",
+        "--no-crt"
+      ],
+      "environment": [
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        },
+        {
+          "key": "PYTHONUNBUFFERED",
+          "value": "1"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/cfg",
+          "containerPath": "/cfg"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/w",
+          "containerPath": "/w"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json"
+}

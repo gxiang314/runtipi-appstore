@@ -1,0 +1,52 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "Copyparty",
+  "port": 8004,
+  "available": true,
+  "exposable": true,
+  "dynamic_config": true,
+  "id": "copyparty",
+  "tipi_version": 1,
+  "version": "1.20.19",
+  "categories": ["utilities", "data"],
+  "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file, no deps.",
+  "short_desc": "Portable file server with resumable uploads, WebDAV and FTP.",
+  "author": "ed",
+  "source": "https://github.com/9001/copyparty",
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Admin username",
+      "env_variable": "COPYPARTY_USER",
+      "required": true,
+      "default": "admin",
+      "regex": "^[a-zA-Z0-9_-]+$",
+      "pattern_error": "Only letters, numbers, dashes and underscores are allowed"
+    },
+    {
+      "type": "password",
+      "label": "Admin password",
+      "env_variable": "COPYPARTY_PASSWORD",
+      "required": true,
+      "min": 8,
+      "max": 128,
+      "hint": "Password for the admin account. Anonymous access is disabled."
+    },
+    {
+      "type": "text",
+      "label": "Anonymous access",
+      "env_variable": "COPYPARTY_ANON_ACCS",
+      "required": false,
+      "default": "",
+      "options": [
+        { "label": "None - login required for everything", "value": "" },
+        { "label": "Read-only - anyone can browse and download", "value": ":r" }
+      ],
+      "hint": "Uploading, moving and deleting always require the admin login."
+    }
+  ],
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1785353134182,
+  "updated_at": 1785353134182,
+  "min_tipi_version": "4.5.0"
+}

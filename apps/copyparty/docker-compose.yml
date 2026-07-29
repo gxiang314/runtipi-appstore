@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+  copyparty:
+    image: copyparty/ac:1.20.19
+    container_name: copyparty
+    restart: unless-stopped
+    command:
+      - -a
+      - ${COPYPARTY_USER}:${COPYPARTY_PASSWORD}
+      - -v
+      - /w::rwmda,${COPYPARTY_USER}${COPYPARTY_ANON_ACCS}
+      - -e2dsa
+      - -e2ts
+      - --no-crt
+    stop_grace_period: 15s
+    ports:
+      - ${APP_PORT}:3923
+    volumes:
+      - ${APP_DATA_DIR}/data/cfg:/cfg
+      - ${APP_DATA_DIR}/data/w:/w
+    environment:
+      - TZ=${TZ}
+      - PYTHONUNBUFFERED=1
+    networks:
+      - tipi_main_network
+    labels:
+      # Main
+      traefik.enable: true
+      traefik.http.middlewares.copyparty-web-redirect.redirectscheme.scheme: https
+      traefik.http.services.copyparty.loadbalancer.server.port: 3923
+      # Web
+      traefik.http.routers.copyparty-insecure.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.copyparty-insecure.entrypoints: web
+      traefik.http.routers.copyparty-insecure.service: copyparty
+      traefik.http.routers.copyparty-insecure.middlewares: copyparty-web-redirect
+      # Websecure
+      traefik.http.routers.copyparty.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.copyparty.entrypoints: websecure
+      traefik.http.routers.copyparty.service: copyparty
+      traefik.http.routers.copyparty.tls.certresolver: myresolver
+      # Local domain
+      traefik.http.routers.copyparty-local-insecure.rule: Host(`copyparty.${LOCAL_DOMAIN}`)
+      traefik.http.routers.copyparty-local-insecure.entrypoints: web
+      traefik.http.routers.copyparty-local-insecure.service: copyparty
+      traefik.http.routers.copyparty-local-insecure.middlewares: copyparty-web-redirect
+      # Local domain secure
+      traefik.http.routers.copyparty-local.rule: Host(`copyparty.${LOCAL_DOMAIN}`)
+      traefik.http.routers.copyparty-local.entrypoints: websecure
+      traefik.http.routers.copyparty-local.service: copyparty
+      traefik.http.routers.copyparty-local.tls: true
+      runtipi.managed: true
