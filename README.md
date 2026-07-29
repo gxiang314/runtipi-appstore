@@ -20,7 +20,7 @@ It contains all the apps that are available for download on [Runtipi](https://gi
 
 > _Don't forget to read the [docs](https://runtipi.io/docs)_
 
-## Apps available (266)
+## Apps available (267)
 
 |                                   App                                   | Name                                                                         | Description                                                                                                                                                         |
 | :---------------------------------------------------------------------: | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -56,6 +56,7 @@ It contains all the apps that are available for download on [Runtipi](https://gi
 |        <img src="apps/cloudflared/metadata/logo.jpg" width="32">        | [Cloudflared](https://github.com/WisdomSky/Cloudflared-web)                  | Cloudflare Tunnels in a Web UI                                                                                                                                      |
 |        <img src="apps/code-server/metadata/logo.jpg" width="32">        | [Code Server](https://github.com/coder/code-server)                          | VS Code in the browser                                                                                                                                              |
 |        <img src="apps/codex-docs/metadata/logo.jpg" width="32">         | [CodeX.docs](https://github.com/codex-team/codex.docs)                       | Free Docs app powered by Editor.js ecosystem.                                                                                                                       |
+|         <img src="apps/copyparty/metadata/logo.jpg" width="32">         | [Copyparty](https://github.com/9001/copyparty)                               | Portable file server with resumable uploads, WebDAV and FTP.                                                                                                        |
 |          <img src="apps/crafty/metadata/logo.jpg" width="32">           | [Crafty](https://gitlab.com/crafty-controller/crafty-4)                      | Python based Control Panel for your Minecraft Server                                                                                                                |
 |        <img src="apps/cross-seed/metadata/logo.jpg" width="32">         | [Cross-Seed](https://github.com/cross-seed/cross-seed)                       | Fully-automatic cross-seeding with Torznab.                                                                                                                         |
 |         <img src="apps/crowdsec/metadata/logo.jpg" width="32">          | [Crowdsec](https://github.com/crowdsecurity/crowdsec)                        | Participative security solution offering crowdsourced protection against malicious IPs and access to the most advanced real-world CTI.                              |
