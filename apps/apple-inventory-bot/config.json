@@ -1,0 +1,70 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "Apple Inventory Bot",
+  "id": "apple-inventory-bot",
+  "available": true,
+  "short_desc": "Telegram alerts for Apple refurbished stock.",
+  "author": "gxiang314",
+  "port": 17999,
+  "categories": ["automation", "finance"],
+  "description": "Monitors Apple's refurbished store and sends Telegram alerts when watched products appear, with price history judgement so you know whether a listing is actually a good deal. Watch rules can be changed by messaging the bot.",
+  "tipi_version": 1,
+  "version": "0.1.0",
+  "source": "https://github.com/gxiang314/apple-inventory-bot",
+  "exposable": true,
+  "dynamic_config": true,
+  "supported_architectures": ["arm64", "amd64"],
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Telegram Bot Token",
+      "hint": "Token from @BotFather",
+      "required": true,
+      "env_variable": "TELEGRAM_BOT_TOKEN"
+    },
+    {
+      "type": "text",
+      "label": "Telegram Chat ID",
+      "hint": "Chat that receives alerts",
+      "required": true,
+      "env_variable": "TELEGRAM_CHAT_ID"
+    },
+    {
+      "type": "text",
+      "label": "Telegram Owner ID",
+      "hint": "User ID allowed to send commands to the bot",
+      "required": true,
+      "env_variable": "TELEGRAM_OWNER_ID"
+    },
+    {
+      "type": "random",
+      "label": "Telegram Webhook Secret",
+      "min": 32,
+      "env_variable": "TELEGRAM_WEBHOOK_SECRET"
+    },
+    {
+      "type": "text",
+      "label": "Telegram Webhook URL",
+      "hint": "Optional public HTTPS endpoint, e.g. https://<your-domain>/webhook/telegram. Leave empty to use polling.",
+      "required": false,
+      "env_variable": "TELEGRAM_WEBHOOK_URL"
+    },
+    {
+      "type": "text",
+      "label": "List URL",
+      "hint": "Apple refurbished listing page to watch. Defaults to the Taiwan refurbished Mac page.",
+      "required": false,
+      "env_variable": "APPLE_BOT_LIST_URL"
+    },
+    {
+      "type": "text",
+      "label": "Cron Expression",
+      "hint": "Scrape schedule. Defaults to every minute.",
+      "required": false,
+      "env_variable": "APPLE_BOT_CRON_EXPR"
+    }
+  ],
+  "created_at": 1785407330000,
+  "updated_at": 1785407330000,
+  "min_tipi_version": "4.7.0"
+}
