@@ -45,7 +45,7 @@
     {
       "type": "text",
       "label": "Telegram Webhook URL",
-      "hint": "Optional public HTTPS endpoint, e.g. https://<your-domain>/webhook/telegram. Leave empty to use polling.",
+      "hint": "Public HTTPS endpoint, e.g. https://<your-domain>/webhook/telegram. Required for chat commands: the bot is webhook-only and never polls, so leaving this empty means it stays silent on /watch, /status and /help. Stock alerts work either way.",
       "required": false,
       "env_variable": "TELEGRAM_WEBHOOK_URL"
     },
