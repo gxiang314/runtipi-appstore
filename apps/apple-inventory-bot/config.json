@@ -9,7 +9,7 @@
   "categories": ["automation", "finance"],
   "description": "Monitors Apple's refurbished store and sends Telegram alerts when watched products appear, with price history judgement so you know whether a listing is actually a good deal. Watch rules can be changed by messaging the bot.",
   "tipi_version": 1,
-  "version": "0.1.1",
+  "version": "0.2.0",
   "source": "https://github.com/gxiang314/apple-inventory-bot",
   "exposable": true,
   "dynamic_config": true,
@@ -45,7 +45,7 @@
     {
       "type": "text",
       "label": "Telegram Webhook URL",
-      "hint": "Public HTTPS endpoint, e.g. https://<your-domain>/webhook/telegram. Required for chat commands: the bot is webhook-only and never polls, so leaving this empty means it stays silent on /watch, /status and /help. Stock alerts work either way.",
+      "hint": "Leave empty unless you have a public HTTPS address. Empty means the bot fetches commands over its own outbound connection, which needs no domain, no open port and no certificate — the right setup for a home server. Set it only if you do have such an address, e.g. https://<your-domain>/webhook/telegram.",
       "required": false,
       "env_variable": "TELEGRAM_WEBHOOK_URL"
     },
@@ -65,6 +65,6 @@
     }
   ],
   "created_at": 1785407330000,
-  "updated_at": 1785423274000,
+  "updated_at": 1785427417000,
   "min_tipi_version": "4.7.0"
 }
