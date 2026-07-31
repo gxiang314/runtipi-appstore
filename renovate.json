@@ -39,9 +39,10 @@
   ],
   "postUpgradeTasks": {
     "commands": [
+      "bun install --frozen-lockfile",
       "bun ./scripts/update-config.ts {{packageFile}} {{newVersion}} {{packageName}}",
       "bunx @biomejs/biome check --write",
-      "bun install && bun run test"
+      "bun run test"
     ],
     "fileFilters": ["**/*"],
     "executionMode": "update"

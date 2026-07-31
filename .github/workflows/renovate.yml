@@ -54,5 +54,5 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           # postUpgradeTasks 執行任意指令，self-hosted 必須顯式允許
-          RENOVATE_ALLOWED_COMMANDS: '["^bun ./scripts/update-config.ts .+$","^bunx @biomejs/biome check --write$","^bun install && bun run test$"]'
+          RENOVATE_ALLOWED_COMMANDS: '["^bun install --frozen-lockfile$","^bun ./scripts/update-config.ts .+$","^bunx @biomejs/biome check --write$","^bun run test$"]'
         run: LOG_LEVEL=${{ github.event.inputs.log_level || 'INFO' }} renovate --token ${{ steps.app-token.outputs.token }} ${{ github.repository }}
