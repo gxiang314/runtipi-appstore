@@ -47,6 +47,15 @@ jobs:
       - name: Install Renovate
         run: bun install -g renovate@40
 
+      # 273 個 app ≈ 600 次 registry 查詢，無快取會撞上 Docker Hub 429 並中止整輪更新
+      - name: Cache Renovate lookups
+        uses: actions/cache@v6
+        with:
+          path: /tmp/renovate-cache
+          key: renovate-cache-${{ github.run_id }}
+          restore-keys: |
+            renovate-cache-
+
       - name: Run renovate
         env:
           # 皆為可選：未設定時 Renovate 照常執行，只是少了 changelog / 較高的 Docker Hub 額度
@@ -55,4 +64,7 @@ jobs:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           # postUpgradeTasks 執行任意指令，self-hosted 必須顯式允許
           RENOVATE_ALLOWED_COMMANDS: '["^bun install --frozen-lockfile$","^bun ./scripts/update-config.ts .+$","^bunx @biomejs/biome check --write$","^bun run test$"]'
+          RENOVATE_CACHE_DIR: /tmp/renovate-cache
+          # 單次 registry 失敗不該讓整輪更新中止（429 會使全部 PR 消失）
+          RENOVATE_DOCKER_MAX_PAGES: "2"
         run: LOG_LEVEL=${{ github.event.inputs.log_level || 'INFO' }} renovate --token ${{ steps.app-token.outputs.token }} ${{ github.repository }}

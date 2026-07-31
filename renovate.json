@@ -2,9 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": false,
   "prHourlyLimit": 20,
+  "prConcurrentLimit": 10,
   "extends": ["config:recommended"],
   "rebaseWhen": "conflicted",
   "enabledManagers": ["custom.regex"],
+  "hostRules": [
+    {
+      "hostType": "docker",
+      "abortOnError": false,
+      "concurrentRequestLimit": 8
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
