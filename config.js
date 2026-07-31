@@ -1,5 +1,10 @@
 export default {
-  allowedCommands: ["bun ./scripts/update-config.ts", "bunx @biomejs/biome check --write", "bun install && bun run test"],
+  allowedCommands: [
+    "^bun install --frozen-lockfile$",
+    "^bun ./scripts/update-config.ts .+$",
+    "^bunx @biomejs/biome check --write$",
+    "^bun run test$",
+  ],
   redisUrl: process.env.RENOVATE_REDIS_URL,
   hostRules: [
     {
@@ -15,7 +20,8 @@ export default {
       password: process.env.DOCKERHUB_TOKEN,
     },
     {
-      matchHost: "docker.io",
+      hostType: "docker",
+      abortOnError: false,
       concurrentRequestLimit: 2,
     },
   ],
