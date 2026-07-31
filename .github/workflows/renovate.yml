@@ -49,8 +49,10 @@ jobs:
 
       - name: Run renovate
         env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          # 皆為可選：未設定時 Renovate 照常執行，只是少了 changelog / 較高的 Docker Hub 額度
+          GITHUB_COM_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          RENOVATE_REDIS_URL: ${{ secrets.RENOVATE_REDIS_URL }}
+          # postUpgradeTasks 執行任意指令，self-hosted 必須顯式允許
+          RENOVATE_ALLOWED_COMMANDS: '["^bun ./scripts/update-config.ts .+$","^bunx @biomejs/biome check --write$","^bun install && bun run test$"]'
         run: LOG_LEVEL=${{ github.event.inputs.log_level || 'INFO' }} renovate --token ${{ steps.app-token.outputs.token }} ${{ github.repository }}
