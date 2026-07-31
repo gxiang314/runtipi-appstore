@@ -6,13 +6,6 @@
   "extends": ["config:recommended"],
   "rebaseWhen": "conflicted",
   "enabledManagers": ["custom.regex"],
-  "hostRules": [
-    {
-      "hostType": "docker",
-      "abortOnError": false,
-      "concurrentRequestLimit": 8
-    }
-  ],
   "customManagers": [
     {
       "customType": "regex",

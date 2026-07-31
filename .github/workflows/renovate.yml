@@ -65,6 +65,9 @@ jobs:
           # postUpgradeTasks 執行任意指令，self-hosted 必須顯式允許
           RENOVATE_ALLOWED_COMMANDS: '["^bun install --frozen-lockfile$","^bun ./scripts/update-config.ts .+$","^bunx @biomejs/biome check --write$","^bun run test$"]'
           RENOVATE_CACHE_DIR: /tmp/renovate-cache
-          # 單次 registry 失敗不該讓整輪更新中止（429 會使全部 PR 消失）
-          RENOVATE_DOCKER_MAX_PAGES: "2"
+          # 有設就用 Redis 做跨執行快取（首選）；沒設則退回上面的 actions/cache 檔案快取
+          RENOVATE_REDIS_URL: ${{ secrets.RENOVATE_REDIS_URL }}
+          # hostRules 是 self-hosted 專用，放在 renovate.json 會被忽略。
+          # abortOnError:false 讓單一 image 的 429 只跳過該 image，而非中止整輪更新。
+          RENOVATE_HOST_RULES: '[{"hostType":"docker","abortOnError":false,"concurrentRequestLimit":8}]'
         run: LOG_LEVEL=${{ github.event.inputs.log_level || 'INFO' }} renovate --token ${{ steps.app-token.outputs.token }} ${{ github.repository }}
