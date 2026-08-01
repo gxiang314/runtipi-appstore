@@ -36,6 +36,16 @@
     {
       "matchPackageNames": ["nextcloud"],
       "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "appflowyinc/appflowy_cloud",
+        "appflowyinc/appflowy_web",
+        "appflowyinc/admin_frontend",
+        "appflowyinc/appflowy_worker",
+        "appflowyinc/gotrue"
+      ],
+      "groupName": "appflowy"
     }
   ],
   "postUpgradeTasks": {

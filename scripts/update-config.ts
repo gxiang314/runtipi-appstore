@@ -64,10 +64,22 @@ export const updateAppConfig = async (packageFile: string, newVersion: string, d
     const dockerComposeYml = await readYamlFile<DockerComposeYml>(dockerComposeYmlPath);
     const dockerComposeJson = await readJsonFileIfExists<DockerComposeJson>(dockerComposeJsonPath);
 
+    const currentVersion = depName
+      ? Object.values(dockerComposeYml?.services ?? {})
+          .find((service) => service.image.startsWith(`${depName}:`))
+          ?.image.split(":")
+          .pop()
+      : undefined;
+
+    const vendorPrefix = depName?.includes("/") ? `${depName.slice(0, depName.lastIndexOf("/"))}/` : null;
+
+    const isLockstepSibling = (image: string) =>
+      Boolean(vendorPrefix && currentVersion && image.startsWith(vendorPrefix) && image.endsWith(`:${currentVersion}`));
+
     if (dockerComposeYml) {
       dockerComposeYml.services = Object.fromEntries(
         Object.entries(dockerComposeYml.services).map(([serviceName, service]) => {
-          if (depName && service.image.startsWith(depName)) {
+          if (depName && (service.image.startsWith(`${depName}:`) || isLockstepSibling(service.image))) {
             const newImage = service.image.replace(/:[^:]+$/, `:${newVersion}`);
             return [serviceName, { ...service, image: newImage }];
           }
@@ -78,7 +90,9 @@ export const updateAppConfig = async (packageFile: string, newVersion: string, d
 
     const mainYamlService = dockerComposeYml ? Object.values(dockerComposeYml.services).find((service) => service["x-runtipi"]?.is_main) : null;
 
-    if (depName && mainYamlService?.image === `${depName}:${newVersion}`) {
+    const appService = dockerComposeYml?.services[config.id];
+
+    if (depName && (mainYamlService?.image === `${depName}:${newVersion}` || appService?.image === `${depName}:${newVersion}`)) {
       config.version = newVersion;
     } else if (dockerComposeJson) {
       for (const service of dockerComposeJson.services) {

@@ -68,4 +68,68 @@ describe("updateAppConfig", () => {
     expect(config.tipi_version).toBe(4);
     expect(config.updated_at).toBeGreaterThan(1000);
   });
+
+  it("bumps same-vendor images pinned to the same version in lockstep", async () => {
+    const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "update-config-lockstep-"));
+    const appDir = path.join(tempRoot, "apps", "demo");
+
+    await fs.mkdir(appDir, { recursive: true });
+    await fs.writeFile(
+      path.join(appDir, "config.json"),
+      JSON.stringify({ id: "demo", version: "1.2.3", tipi_version: 3, updated_at: 1000 }, null, 2),
+    );
+    await fs.writeFile(
+      path.join(appDir, "docker-compose.yml"),
+      [
+        "services:",
+        "  demo:",
+        "    image: 'acme/server:1.2.3'",
+        "  demo-worker:",
+        "    image: 'acme/worker:1.2.3'",
+        "  demo-proxy:",
+        "    image: 'nginx:1.29-alpine'",
+        "    x-runtipi:",
+        "      is_main: true",
+        "  db:",
+        "    image: 'postgres:14'",
+      ].join("\n"),
+    );
+
+    await updateAppConfig(path.join(appDir, "docker-compose.yml"), "1.2.4", "acme/server");
+
+    const config = JSON.parse(await fs.readFile(path.join(appDir, "config.json"), "utf8")) as { version: string };
+    const compose = jsyaml.load(await fs.readFile(path.join(appDir, "docker-compose.yml"), "utf8")) as {
+      services: Record<string, { image: string }>;
+    };
+
+    expect(compose.services.demo?.image).toBe("acme/server:1.2.4");
+    expect(compose.services["demo-worker"]?.image).toBe("acme/worker:1.2.4");
+    expect(compose.services["demo-proxy"]?.image).toBe("nginx:1.29-alpine");
+    expect(compose.services.db?.image).toBe("postgres:14");
+    expect(config.version).toBe("1.2.4");
+  });
+
+  it("leaves same-vendor images on a different version untouched", async () => {
+    const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "update-config-independent-"));
+    const appDir = path.join(tempRoot, "apps", "demo");
+
+    await fs.mkdir(appDir, { recursive: true });
+    await fs.writeFile(
+      path.join(appDir, "config.json"),
+      JSON.stringify({ id: "demo", version: "1.2.3", tipi_version: 3, updated_at: 1000 }, null, 2),
+    );
+    await fs.writeFile(
+      path.join(appDir, "docker-compose.yml"),
+      ["services:", "  demo:", "    image: 'acme/server:1.2.3'", "  demo-web:", "    image: 'acme/web:0.9.1'"].join("\n"),
+    );
+
+    await updateAppConfig(path.join(appDir, "docker-compose.yml"), "1.2.4", "acme/server");
+
+    const compose = jsyaml.load(await fs.readFile(path.join(appDir, "docker-compose.yml"), "utf8")) as {
+      services: Record<string, { image: string }>;
+    };
+
+    expect(compose.services.demo?.image).toBe("acme/server:1.2.4");
+    expect(compose.services["demo-web"]?.image).toBe("acme/web:0.9.1");
+  });
 });
