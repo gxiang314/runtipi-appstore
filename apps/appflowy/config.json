@@ -1,0 +1,109 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "AppFlowy",
+  "available": true,
+  "exposable": true,
+  "dynamic_config": false,
+  "port": 8085,
+  "id": "appflowy",
+  "tipi_version": 1,
+  "version": "0.16.2",
+  "categories": ["utilities", "data"],
+  "description": "AppFlowy is an AI-ready workspace where you can manage projects, wikis and tasks. It is an open source alternative to Notion, giving you full control of your data. This package deploys the full self-hosted AppFlowy Cloud stack: the cloud API, web client, admin console, background worker, GoTrue authentication, PostgreSQL with pgvector, Redis and MinIO object storage, all behind a single nginx entrypoint.",
+  "short_desc": "Open source alternative to Notion. You are in charge of your data and customizations.",
+  "author": "AppFlowy-IO",
+  "website": "https://appflowy.com/",
+  "source": "https://github.com/AppFlowy-IO/AppFlowy",
+  "form_fields": [
+    {
+      "type": "email",
+      "label": "Admin email",
+      "hint": "Email address of the initial administrator, used to sign in to the admin console at /console.",
+      "required": true,
+      "env_variable": "APPFLOWY_ADMIN_EMAIL"
+    },
+    {
+      "type": "password",
+      "label": "Admin password",
+      "hint": "Password for the initial administrator account.",
+      "min": 8,
+      "required": true,
+      "env_variable": "APPFLOWY_ADMIN_PASSWORD"
+    },
+    {
+      "type": "boolean",
+      "label": "Disable public sign up",
+      "hint": "Recommended. When enabled, new users can only join by invitation from the admin console.",
+      "default": true,
+      "env_variable": "APPFLOWY_DISABLE_SIGNUP"
+    },
+    {
+      "type": "boolean",
+      "label": "Auto confirm new users",
+      "hint": "Skip email confirmation on sign up. Disable this only if you have configured SMTP below.",
+      "default": true,
+      "env_variable": "APPFLOWY_MAILER_AUTOCONFIRM"
+    },
+    {
+      "type": "text",
+      "label": "WebSocket scheme",
+      "hint": "Use ws when exposing AppFlowy over http, or wss when exposing it over https.",
+      "default": "ws",
+      "env_variable": "APPFLOWY_WS_SCHEME"
+    },
+    {
+      "type": "text",
+      "label": "SMTP host",
+      "hint": "Optional. Required for email confirmation, invitations and password recovery.",
+      "placeholder": "smtp.gmail.com",
+      "env_variable": "APPFLOWY_SMTP_HOST"
+    },
+    {
+      "type": "number",
+      "label": "SMTP port",
+      "hint": "Optional. Use 465 for implicit TLS.",
+      "default": 465,
+      "env_variable": "APPFLOWY_SMTP_PORT"
+    },
+    {
+      "type": "text",
+      "label": "SMTP username",
+      "hint": "Optional. The sender address used for outgoing email.",
+      "env_variable": "APPFLOWY_SMTP_USER"
+    },
+    {
+      "type": "password",
+      "label": "SMTP password",
+      "hint": "Optional. Password or app password for the SMTP account.",
+      "env_variable": "APPFLOWY_SMTP_PASS"
+    },
+    {
+      "type": "random",
+      "label": "JWT secret",
+      "min": 32,
+      "env_variable": "APPFLOWY_JWT_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "env_variable": "APPFLOWY_DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "MinIO root user",
+      "min": 20,
+      "env_variable": "APPFLOWY_MINIO_ROOT_USER"
+    },
+    {
+      "type": "random",
+      "label": "MinIO root password",
+      "min": 32,
+      "env_variable": "APPFLOWY_MINIO_ROOT_PASSWORD"
+    }
+  ],
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1785062400000,
+  "updated_at": 1785062400000,
+  "min_tipi_version": "4.5.0"
+}
