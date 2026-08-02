@@ -1,9 +1,6 @@
 services:
   apple-inventory-bot:
-    image: 'ghcr.io/gxiang314/apple-inventory-bot:0.2.0'
-    # The image runs as a non-root user and ${APP_DATA_DIR} is owned by 1000 on
-    # the host. These have to agree, or SQLite cannot create history.db in /data
-    # and the container restart-loops on "unable to open database file".
+    image: ghcr.io/gxiang314/apple-inventory-bot:0.3.0
     user: '1000:1000'
     environment:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
@@ -17,7 +14,7 @@ services:
       - WATCH_CONFIG=/data/watch.yml
       - DB_PATH=/data/history.db
     volumes:
-      - '${APP_DATA_DIR}/data:/data'
+      - ${APP_DATA_DIR}/data:/data
     x-runtipi:
       internal_port: 17999
       is_main: true
