@@ -8,8 +8,8 @@
   "port": 17999,
   "categories": ["automation", "finance"],
   "description": "Monitors Apple's refurbished store and sends Telegram alerts when watched products appear, with price history judgement so you know whether a listing is actually a good deal. Watch rules can be changed by messaging the bot.",
-  "tipi_version": 3,
-  "version": "0.2.0",
+  "tipi_version": 4,
+  "version": "0.3.0",
   "source": "https://github.com/gxiang314/apple-inventory-bot",
   "exposable": true,
   "dynamic_config": true,
@@ -65,6 +65,6 @@
     }
   ],
   "created_at": 1785407330000,
-  "updated_at": 1785429837000,
+  "updated_at": 1785639286994,
   "min_tipi_version": "4.7.0"
 }
