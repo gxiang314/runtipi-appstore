@@ -47,7 +47,7 @@ services:
       traefik.http.routers.romm-local.tls: true
       runtipi.managed: true
   romm-db:
-    image: lscr.io/linuxserver/mariadb:11.4.5
+    image: lscr.io/linuxserver/mariadb:11.8.8
     container_name: romm-db
     environment:
       - MYSQL_ROOT_PASSWORD=${ROMM_MYSQL_ROOT_PASSWORD}
