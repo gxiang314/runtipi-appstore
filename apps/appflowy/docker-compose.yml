@@ -1,6 +1,6 @@
 services:
   appflowy:
-    image: appflowyinc/appflowy_cloud:0.16.2
+    image: appflowyinc/appflowy_cloud:0.17.1
     environment:
       - RUST_LOG=info
       - APPFLOWY_ENVIRONMENT=production
@@ -39,7 +39,6 @@ services:
       appflowy-minio:
         condition: service_healthy
     restart: unless-stopped
-
   appflowy-nginx:
     image: nginx:1.29-alpine
     volumes:
@@ -51,9 +50,8 @@ services:
     x-runtipi:
       internal_port: 80
       is_main: true
-
   appflowy-web:
-    image: appflowyinc/appflowy_web:0.16.2
+    image: appflowyinc/appflowy_web:0.16.4
     environment:
       - APPFLOWY_BASE_URL=${APP_PROTOCOL:-http}://${APP_DOMAIN}
       - APPFLOWY_GOTRUE_BASE_URL=${APP_PROTOCOL:-http}://${APP_DOMAIN}/gotrue
@@ -62,9 +60,8 @@ services:
       appflowy:
         condition: service_healthy
     restart: unless-stopped
-
   appflowy-admin-frontend:
-    image: appflowyinc/admin_frontend:0.16.2
+    image: appflowyinc/admin_frontend:0.17.1
     environment:
       - APPFLOWY_GOTRUE_BASE_URL=http://appflowy-gotrue:9999
       - APPFLOWY_BASE_URL=http://appflowy:8000
@@ -72,9 +69,8 @@ services:
       appflowy:
         condition: service_healthy
     restart: unless-stopped
-
   appflowy-worker:
-    image: appflowyinc/appflowy_worker:0.16.2
+    image: appflowyinc/appflowy_worker:0.17.1
     environment:
       - RUST_LOG=info
       - APPFLOWY_ENVIRONMENT=production
@@ -98,9 +94,8 @@ services:
       appflowy:
         condition: service_healthy
     restart: unless-stopped
-
   appflowy-gotrue:
-    image: appflowyinc/gotrue:0.16.2
+    image: appflowyinc/gotrue:0.17.1
     environment:
       - GOTRUE_ADMIN_EMAIL=${APPFLOWY_ADMIN_EMAIL}
       - GOTRUE_ADMIN_PASSWORD=${APPFLOWY_ADMIN_PASSWORD}
@@ -135,7 +130,6 @@ services:
       appflowy-db:
         condition: service_healthy
     restart: unless-stopped
-
   appflowy-db:
     image: pgvector/pgvector:pg16
     environment:
@@ -145,12 +139,17 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "tipi", "-d", "appflowy"]
+      test:
+        - CMD
+        - pg_isready
+        - '-U'
+        - tipi
+        - '-d'
+        - appflowy
       interval: 5s
       timeout: 5s
       retries: 12
     restart: unless-stopped
-
   appflowy-redis:
     image: redis:7-alpine
     volumes:
@@ -161,7 +160,6 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
-
   appflowy-minio:
     image: minio/minio:RELEASE.2025-04-22T22-12-26Z
     command: server /data --console-address ":9001"
@@ -172,11 +170,14 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/minio:/data
     healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
+      test:
+        - CMD
+        - mc
+        - ready
+        - local
       interval: 30s
       timeout: 20s
       retries: 3
     restart: unless-stopped
-
 x-runtipi:
   schema_version: 2
