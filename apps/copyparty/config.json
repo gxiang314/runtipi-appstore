@@ -6,8 +6,8 @@
   "exposable": true,
   "dynamic_config": true,
   "id": "copyparty",
-  "tipi_version": 2,
-  "version": "1.20.19",
+  "tipi_version": 4,
+  "version": "1.20.20",
   "categories": ["utilities", "data"],
   "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file, no deps.",
   "short_desc": "Portable file server with resumable uploads, WebDAV and FTP.",
@@ -39,14 +39,20 @@
       "required": true,
       "default": ":",
       "options": [
-        { "label": "None - login required for everything", "value": ":" },
-        { "label": "Read-only - anyone can browse and download", "value": ":r" }
+        {
+          "label": "None - login required for everything",
+          "value": ":"
+        },
+        {
+          "label": "Read-only - anyone can browse and download",
+          "value": ":r"
+        }
       ],
       "hint": "Uploading, moving and deleting always require the admin login."
     }
   ],
   "supported_architectures": ["arm64", "amd64"],
   "created_at": 1785353134182,
-  "updated_at": 1785353134182,
+  "updated_at": 1785825861319,
   "min_tipi_version": "4.5.0"
 }
