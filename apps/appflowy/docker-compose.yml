@@ -51,7 +51,7 @@ services:
       internal_port: 80
       is_main: true
   appflowy-web:
-    image: appflowyinc/appflowy_web:0.16.5
+    image: appflowyinc/appflowy_web:0.16.6
     environment:
       - APPFLOWY_BASE_URL=${APP_PROTOCOL:-http}://${APP_DOMAIN}
       - APPFLOWY_GOTRUE_BASE_URL=${APP_PROTOCOL:-http}://${APP_DOMAIN}/gotrue
@@ -61,7 +61,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
   appflowy-admin-frontend:
-    image: appflowyinc/admin_frontend:0.17.2
+    image: appflowyinc/admin_frontend:0.17.3
     environment:
       - APPFLOWY_GOTRUE_BASE_URL=http://appflowy-gotrue:9999
       - APPFLOWY_BASE_URL=http://appflowy:8000
