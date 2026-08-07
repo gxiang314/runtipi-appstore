@@ -1,0 +1,93 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "Jenkins",
+  "port": 8590,
+  "uid": 1000,
+  "gid": 1000,
+  "available": true,
+  "exposable": true,
+  "dynamic_config": true,
+  "id": "jenkins",
+  "tipi_version": 1,
+  "version": "2.568.2",
+  "categories": ["development", "automation"],
+  "description": "Jenkins is the leading open source automation server. It provides hundreds of plugins to support building, deploying and automating any project. This package runs the Alpine-based LTS image with a strict memory ceiling so it stays predictable on small servers: the Java heap, the container memory limit and the memory reservation are all configurable before install.",
+  "short_desc": "The leading open source automation server.",
+  "author": "Jenkins project",
+  "source": "https://github.com/jenkinsci/docker",
+  "website": "https://www.jenkins.io/",
+  "form_fields": [
+    {
+      "type": "number",
+      "label": "Container memory limit (MB)",
+      "hint": "Hard ceiling enforced by Docker on the whole container. Keep it comfortably above the max heap, the JVM needs headroom for metaspace, threads and buffers. Default 1024.",
+      "default": 1024,
+      "min": 256,
+      "required": false,
+      "env_variable": "JENKINS_MEMORY_LIMIT"
+    },
+    {
+      "type": "number",
+      "label": "Container memory reservation (MB)",
+      "hint": "Soft floor Docker keeps available for Jenkins under memory pressure. Default 256.",
+      "default": 256,
+      "min": 64,
+      "required": false,
+      "env_variable": "JENKINS_MEMORY_RESERVATION"
+    },
+    {
+      "type": "number",
+      "label": "Java max heap -Xmx (MB)",
+      "hint": "Upper bound of the Java heap. Set this to roughly half the container memory limit so the JVM overhead still fits. Default 512.",
+      "default": 512,
+      "min": 128,
+      "required": false,
+      "env_variable": "JENKINS_HEAP_MAX"
+    },
+    {
+      "type": "number",
+      "label": "Java initial heap -Xms (MB)",
+      "hint": "Heap allocated at startup. Must not exceed the max heap. Default 256.",
+      "default": 256,
+      "min": 64,
+      "required": false,
+      "env_variable": "JENKINS_HEAP_MIN"
+    },
+    {
+      "type": "boolean",
+      "label": "Run the setup wizard on first start",
+      "hint": "Leave enabled for the normal guided setup. The initial admin password is printed in the app logs.",
+      "default": true,
+      "required": false,
+      "env_variable": "JENKINS_SETUP_WIZARD"
+    },
+    {
+      "type": "number",
+      "label": "Inbound agent port",
+      "hint": "Port used by inbound (JNLP) build agents. Only matters if you attach external agents. Default 50000.",
+      "default": 50000,
+      "min": 1,
+      "max": 65535,
+      "required": false,
+      "env_variable": "JENKINS_AGENT_PORT"
+    },
+    {
+      "type": "text",
+      "label": "URL prefix",
+      "hint": "Optional. Serve Jenkins from a sub-path, for example /jenkins. Leave empty to serve from the root.",
+      "required": false,
+      "env_variable": "JENKINS_PREFIX"
+    },
+    {
+      "type": "text",
+      "label": "Extra JAVA_OPTS",
+      "hint": "Optional. Appended verbatim to JENKINS_JAVA_OPTS. Note that -XX:MaxRAMPercentage only takes effect if you also clear the max heap field, since an explicit -Xmx overrides it.",
+      "required": false,
+      "env_variable": "JENKINS_EXTRA_JAVA_OPTS"
+    }
+  ],
+  "supported_architectures": ["arm64", "amd64"],
+  "created_at": 1754611200000,
+  "updated_at": 1754611200000,
+  "min_tipi_version": "4.8.0"
+}
