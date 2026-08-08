@@ -6,8 +6,8 @@
   "dynamic_config": false,
   "port": 8085,
   "id": "appflowy",
-  "tipi_version": 15,
-  "version": "0.17.2",
+  "tipi_version": 20,
+  "version": "0.17.4",
   "categories": ["utilities", "data"],
   "description": "AppFlowy is an AI-ready workspace where you can manage projects, wikis and tasks. It is an open source alternative to Notion, giving you full control of your data. This package deploys the full self-hosted AppFlowy Cloud stack: the cloud API, web client, admin console, background worker, GoTrue authentication, PostgreSQL with pgvector, Redis and MinIO object storage, all behind a single nginx entrypoint.",
   "short_desc": "Open source alternative to Notion. You are in charge of your data and customizations.",
@@ -104,6 +104,6 @@
   ],
   "supported_architectures": ["arm64", "amd64"],
   "created_at": 1785062400000,
-  "updated_at": 1786082011686,
+  "updated_at": 1786165945659,
   "min_tipi_version": "4.5.0"
 }
