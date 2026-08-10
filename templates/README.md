@@ -1,24 +1,12 @@
-# Runtipi App Store ⛺
+# Personal Runtipi App Store ⛺
 
-This is the official Runtipi App Store.
-It contains all the apps that are available for download on [Runtipi](https://github.com/runtipi/runtipi).
+A personal [Runtipi](https://github.com/runtipi/runtipi) app store containing apps that are not in the official store.
 
-> [!NOTE]
-> This repository continues to receive updates; however, no new applications will be accepted. Please limit your pull requests to bug fixes. See [explanation](https://github.com/runtipi/runtipi/issues/2317#issuecomment-3217972183).
+This store is meant to run **alongside** the [official app store](https://github.com/runtipi/runtipi-appstore), not to replace it. Add both in Runtipi and you get the official catalogue plus the apps below.
 
-## How to add addtionals apps
+## How to use it
 
-- Use the `Add custom app` feature
-- Add a [community-maintained store](https://github.com/runtipi/runtipi/discussions/categories/app-stores)
-- Create [your own appstore](https://runtipi.io/docs/guides/create-your-own-app-store)
-
-### Need help ?
-
-- [Create a discussion](https://github.com/runtipi/runtipi-appstore/discussions)
-- [Join the Discord](https://discord.gg/Bu9qEPnHsc)
-- [Join the Forum](https://forums.runtipi.io/)
-
-> *Don't forget to read the [docs](https://runtipi.io/docs)*
+In Runtipi, go to **Settings → App Stores** and add this repository's URL. See the [custom app store guide](https://runtipi.io/docs/guides/create-your-own-app-store).
 
 ## Apps available (<!appsCount>)
 
@@ -26,11 +14,20 @@ It contains all the apps that are available for download on [Runtipi](https://gi
 | :-: | ---- | ----------- |
 <!appsList>
 
-## Code requirements
+## Development
 
-1. Install **[Node.js](https://nodejs.org/en)** on your machine
-2. Install **[pnpm](https://pnpm.io/installation)** package manager
-3. Install dependencies (from the root of the project)
+Uses [bun](https://bun.sh) as the runtime and test runner.
+
 ```bash
-pnpm install
+bun install
+bun run test   # validates every app in apps/
+bun run lint
 ```
+
+Bumping an app to a new version:
+
+```bash
+bun ./scripts/update-config.ts apps/<id>/docker-compose.yml <newVersion> <imageName>
+```
+
+Renovate opens these PRs automatically by regex-matching `image:` lines in the compose files. Database images (postgres, mariadb, redis, …) are intentionally pinned and excluded.
