@@ -20,7 +20,7 @@ It contains all the apps that are available for download on [Runtipi](https://gi
 
 > _Don't forget to read the [docs](https://runtipi.io/docs)_
 
-## Apps available (271)
+## Apps available (272)
 
 |                                   App                                   | Name                                                                         | Description                                                                                                                                                         |
 | :---------------------------------------------------------------------: | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -135,6 +135,7 @@ It contains all the apps that are available for download on [Runtipi](https://gi
 |          <img src="apps/jackett/metadata/logo.jpg" width="32">          | [Jackett](https://github.com/Jackett/Jackett)                                | API Support for your favorite torrent trackers                                                                                                                      |
 |         <img src="apps/jellyfin/metadata/logo.jpg" width="32">          | [Jellyfin](https://github.com/jellyfin/jellyfin)                             | A media server for your home collection                                                                                                                             |
 |       <img src="apps/jellyfin-vue/metadata/logo.jpg" width="32">        | [Jellyfin Vue (Beta)](https://github.com/jellyfin/jellyfin-vue)              | A modern web client for Jellyfin based on Vue                                                                                                                       |
+|          <img src="apps/jenkins/metadata/logo.jpg" width="32">          | [Jenkins](https://github.com/jenkinsci/docker)                               | The leading open source automation server.                                                                                                                          |
 |          <img src="apps/joplin/metadata/logo.jpg" width="32">           | [Joplin Server](https://github.com/laurent22/joplin)                         | Note taking and to-do application with synchronisation                                                                                                              |
 |         <img src="apps/kanboard/metadata/logo.jpg" width="32">          | [Kanboard](https://github.com/kanboard/kanboard)                             | Open Source Kanban Board                                                                                                                                            |
 |         <img src="apps/kapowarr/metadata/logo.jpg" width="32">          | [Kapowarr](https://github.com/Casvt/Kapowarr)                                | Kapowarr is a software to build and manage a comic book library, fitting in the *arr suite of software.                                                             |
