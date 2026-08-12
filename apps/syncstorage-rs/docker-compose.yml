@@ -1,0 +1,75 @@
+services:
+  syncstorage-rs:
+    image: ghcr.io/mozilla-services/syncstorage-rs/syncstorage-rs-mysql:ab47abaaed
+    platform: linux/amd64
+    environment:
+      - SYNC_HOST=0.0.0.0
+      - SYNC_PORT=8000
+      - SYNC_MASTER_SECRET=${SYNCSTORAGE_MASTER_SECRET}
+      - SYNC_SYNCSTORAGE__DATABASE_URL=mysql://sync:${SYNCSTORAGE_DB_PASSWORD}@syncstorage-rs-db:3306/syncserver
+      - SYNC_TOKENSERVER__DATABASE_URL=mysql://sync:${SYNCSTORAGE_DB_PASSWORD}@syncstorage-rs-db:3306/syncserver
+      - SYNC_TOKENSERVER__ENABLED=true
+      - SYNC_TOKENSERVER__NODE_TYPE=mysql
+      - SYNC_TOKENSERVER__RUN_MIGRATIONS=true
+      - SYNC_TOKENSERVER__FXA_EMAIL_DOMAIN=api.accounts.firefox.com
+      - SYNC_TOKENSERVER__FXA_OAUTH_SERVER_URL=https://oauth.accounts.firefox.com
+      - SYNC_TOKENSERVER__FXA_METRICS_HASH_SECRET=${SYNCSTORAGE_METRICS_HASH_SECRET}
+      - SYNC_TOKENSERVER__INIT_NODE_URL=${APP_PROTOCOL:-http}://${APP_DOMAIN}
+      - SYNC_HUMAN_LOGS=true
+      - RUST_LOG=info
+    depends_on:
+      syncstorage-rs-db:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8000/__heartbeat__']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    x-runtipi:
+      internal_port: 8000
+      is_main: true
+
+  # Registers this instance as the sync-1.5 storage node. Upstream self-registers
+  # via SYNC_TOKENSERVER__INIT_NODE_URL, but every published MySQL image predates
+  # that feature, so the insert is done here with the same SQL upstream uses.
+  syncstorage-rs-init:
+    image: mysql:8.0
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        set -e
+        mysql -h syncstorage-rs-db -usync -p"$$SYNCSTORAGE_DB_PASSWORD" syncserver <<SQL
+        INSERT IGNORE INTO services (service, pattern) VALUES ('sync-1.5', '{node}/1.5/{uid}');
+        INSERT IGNORE INTO nodes (service, node, available, current_load, capacity, downed, backoff)
+        VALUES ((SELECT id FROM services WHERE service = 'sync-1.5'), '$$NODE_URL', 1, 0, 100000, 0, 0);
+        SQL
+        echo "storage node registered: $$NODE_URL"
+    environment:
+      - SYNCSTORAGE_DB_PASSWORD=${SYNCSTORAGE_DB_PASSWORD}
+      - NODE_URL=${APP_PROTOCOL:-http}://${APP_DOMAIN}
+    depends_on:
+      syncstorage-rs:
+        condition: service_healthy
+    restart: on-failure
+
+  syncstorage-rs-db:
+    image: mysql:8.0
+    command: --explicit_defaults_for_timestamp
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=syncserver
+      - MYSQL_USER=sync
+      - MYSQL_PASSWORD=${SYNCSTORAGE_DB_PASSWORD}
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/var/lib/mysql
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin -h 127.0.0.1 -usync -p"$$MYSQL_PASSWORD" ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+x-runtipi:
+  schema_version: 2

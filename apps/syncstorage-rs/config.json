@@ -1,0 +1,43 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "Syncstorage-rs",
+  "port": 8006,
+  "available": true,
+  "exposable": true,
+  "dynamic_config": false,
+  "id": "syncstorage-rs",
+  "tipi_version": 1,
+  "version": "ab47abaaed",
+  "categories": ["utilities", "data", "network"],
+  "description": "Mozilla Sync Storage built with Rust: the server behind Firefox Sync. Running your own instance keeps your bookmarks, history, tabs, passwords and preferences on hardware you control while still authenticating against Mozilla accounts, which never see your plaintext password or your sync data. This package deploys the official MySQL build of Syncserver with Tokenserver enabled, plus the two MySQL databases it needs, so it is a complete self-contained sync backend. After installing, point Firefox at it by setting identity.sync.tokenserver.uri in about:config to <your app URL>/1.0/sync/1.5.",
+  "short_desc": "Self-hosted Firefox Sync storage server from Mozilla.",
+  "author": "mozilla-services",
+  "website": "https://mozilla-services.github.io/syncstorage-rs/",
+  "source": "https://github.com/mozilla-services/syncstorage-rs",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Master secret",
+      "hint": "Secret used to derive the Hawk signing and token secrets. Changing it later invalidates all issued sync tokens.",
+      "min": 64,
+      "env_variable": "SYNCSTORAGE_MASTER_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Metrics hash secret",
+      "hint": "Secret used to anonymise metrics user ids.",
+      "min": 64,
+      "env_variable": "SYNCSTORAGE_METRICS_HASH_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "env_variable": "SYNCSTORAGE_DB_PASSWORD"
+    }
+  ],
+  "supported_architectures": ["amd64"],
+  "created_at": 1786563970000,
+  "updated_at": 1786563970000,
+  "min_tipi_version": "4.5.0"
+}
