@@ -1,0 +1,22 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "HonKit",
+  "port": 8005,
+  "available": true,
+  "exposable": true,
+  "dynamic_config": true,
+  "id": "honkit",
+  "tipi_version": 1,
+  "version": "6.1.7",
+  "categories": ["books", "development"],
+  "description": "HonKit builds beautiful books and documentation websites from Markdown or AsciiDoc files stored in a plain folder. It is a maintained fork of the legacy GitBook toolchain, keeping the same themes, plugins and book.json configuration while running on modern Node.js. Drop your SUMMARY.md and chapter files into the app data folder and the book is served as a static website with live reloading, so edits on disk appear in the browser without restarting the container.",
+  "short_desc": "Build documentation websites and books from Markdown.",
+  "author": "azu",
+  "source": "https://github.com/honkit/honkit",
+  "website": "https://honkit.netlify.app/",
+  "form_fields": [],
+  "supported_architectures": ["amd64"],
+  "created_at": 1786484896208,
+  "updated_at": 1786484896208,
+  "min_tipi_version": "4.5.0"
+}

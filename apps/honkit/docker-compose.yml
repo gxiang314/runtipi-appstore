@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  honkit:
+    image: honkit/honkit:v6.1.7
+    container_name: honkit
+    restart: unless-stopped
+    init: true
+    working_dir: /book
+    entrypoint:
+      - /bin/sh
+      - -c
+      - '[ -f /book/SUMMARY.md ] || honkit init /book; exec honkit serve /book /book/_book --port 4000 --lrport 35729'
+    ports:
+      - ${APP_PORT}:4000
+    volumes:
+      - ${APP_DATA_DIR}/data/book:/book
+    environment:
+      - TZ=${TZ}
+    networks:
+      - tipi_main_network
+    labels:
+      traefik.enable: true
+      traefik.http.middlewares.honkit-web-redirect.redirectscheme.scheme: https
+      traefik.http.services.honkit.loadbalancer.server.port: 4000
+      traefik.http.routers.honkit-insecure.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.honkit-insecure.entrypoints: web
+      traefik.http.routers.honkit-insecure.service: honkit
+      traefik.http.routers.honkit-insecure.middlewares: honkit-web-redirect
+      traefik.http.routers.honkit.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.honkit.entrypoints: websecure
+      traefik.http.routers.honkit.service: honkit
+      traefik.http.routers.honkit.tls.certresolver: myresolver
+      traefik.http.routers.honkit-local-insecure.rule: Host(`honkit.${LOCAL_DOMAIN}`)
+      traefik.http.routers.honkit-local-insecure.entrypoints: web
+      traefik.http.routers.honkit-local-insecure.service: honkit
+      traefik.http.routers.honkit-local-insecure.middlewares: honkit-web-redirect
+      traefik.http.routers.honkit-local.rule: Host(`honkit.${LOCAL_DOMAIN}`)
+      traefik.http.routers.honkit-local.entrypoints: websecure
+      traefik.http.routers.honkit-local.service: honkit
+      traefik.http.routers.honkit-local.tls: true
+      runtipi.managed: true
