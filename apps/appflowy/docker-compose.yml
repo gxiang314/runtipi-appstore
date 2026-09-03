@@ -1,6 +1,6 @@
 services:
   appflowy:
-    image: appflowyinc/appflowy_cloud:0.18.2
+    image: appflowyinc/appflowy_cloud:0.18.3
     environment:
       - RUST_LOG=info
       - APPFLOWY_ENVIRONMENT=production
@@ -70,7 +70,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
   appflowy-worker:
-    image: appflowyinc/appflowy_worker:0.18.2
+    image: appflowyinc/appflowy_worker:0.18.3
     environment:
       - RUST_LOG=info
       - APPFLOWY_ENVIRONMENT=production
@@ -95,7 +95,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
   appflowy-gotrue:
-    image: appflowyinc/gotrue:0.18.2
+    image: appflowyinc/gotrue:0.18.3
     environment:
       - GOTRUE_ADMIN_EMAIL=${APPFLOWY_ADMIN_EMAIL}
       - GOTRUE_ADMIN_PASSWORD=${APPFLOWY_ADMIN_PASSWORD}
