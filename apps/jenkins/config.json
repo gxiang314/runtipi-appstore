@@ -8,8 +8,8 @@
   "exposable": true,
   "dynamic_config": true,
   "id": "jenkins",
-  "tipi_version": 1,
-  "version": "2.568.2",
+  "tipi_version": 2,
+  "version": "2.568.3",
   "categories": ["development", "automation"],
   "description": "Jenkins is the leading open source automation server. It provides hundreds of plugins to support building, deploying and automating any project. This package runs the Alpine-based LTS image with a strict memory ceiling so it stays predictable on small servers: the Java heap, the container memory limit and the memory reservation are all configurable before install.",
   "short_desc": "The leading open source automation server.",
@@ -88,6 +88,6 @@
   ],
   "supported_architectures": ["arm64", "amd64"],
   "created_at": 1754611200000,
-  "updated_at": 1754611200000,
+  "updated_at": 1788425902072,
   "min_tipi_version": "4.8.0"
 }

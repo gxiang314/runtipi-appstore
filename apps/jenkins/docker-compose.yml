@@ -1,8 +1,8 @@
 services:
   jenkins:
-    image: jenkins/jenkins:2.568.2-lts-alpine
+    image: jenkins/jenkins:2.568.3
     environment:
-      JENKINS_JAVA_OPTS: -Xms${JENKINS_HEAP_MIN:-256}m -Xmx${JENKINS_HEAP_MAX:-512}m -Djava.awt.headless=true -Djenkins.install.runSetupWizard=${JENKINS_SETUP_WIZARD:-true} ${JENKINS_EXTRA_JAVA_OPTS}
+      JENKINS_JAVA_OPTS: '-Xms${JENKINS_HEAP_MIN:-256}m -Xmx${JENKINS_HEAP_MAX:-512}m -Djava.awt.headless=true -Djenkins.install.runSetupWizard=${JENKINS_SETUP_WIZARD:-true} ${JENKINS_EXTRA_JAVA_OPTS}'
       JENKINS_OPTS: ${JENKINS_PREFIX:+--prefix=${JENKINS_PREFIX}}
       JENKINS_SLAVE_AGENT_PORT: ${JENKINS_AGENT_PORT:-50000}
       TZ: ${TZ}
