@@ -40,7 +40,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
   appflowy-nginx:
-    image: nginx:1.29-alpine
+    image: nginx:1.31
     volumes:
       - ${APP_DATA_DIR}/data/nginx/appflowy.conf:/etc/nginx/nginx.conf:ro
     depends_on:
