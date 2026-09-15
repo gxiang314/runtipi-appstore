@@ -61,7 +61,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
   appflowy-admin-frontend:
-    image: appflowyinc/admin_frontend:0.18.0
+    image: appflowyinc/admin_frontend:0.18.1
     environment:
       - APPFLOWY_GOTRUE_BASE_URL=http://appflowy-gotrue:9999
       - APPFLOWY_BASE_URL=http://appflowy:8000
@@ -95,7 +95,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
   appflowy-gotrue:
-    image: appflowyinc/gotrue:0.18.7
+    image: appflowyinc/gotrue:0.18.8
     environment:
       - GOTRUE_ADMIN_EMAIL=${APPFLOWY_ADMIN_EMAIL}
       - GOTRUE_ADMIN_PASSWORD=${APPFLOWY_ADMIN_PASSWORD}
