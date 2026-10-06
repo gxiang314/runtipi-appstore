@@ -2,7 +2,7 @@
   "services": [
     {
       "name": "copyparty",
-      "image": "copyparty/ac:1.20.24",
+      "image": "copyparty/ac:1.20.25",
       "isMain": true,
       "internalPort": 3923,
       "command": [
