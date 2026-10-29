@@ -1,6 +1,6 @@
 services:
   copdszlib:
-    image: ghcr.io/gxiang314/copdszlib:4.1.0
+    image: ghcr.io/gxiang314/copdszlib:latest
     user: '1000:1000'
     environment:
       - OPDS_USER=${COPDS_USER}
