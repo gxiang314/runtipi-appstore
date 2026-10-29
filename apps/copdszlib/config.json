@@ -1,0 +1,51 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "cOPDSzlib",
+  "id": "copdszlib",
+  "available": true,
+  "short_desc": "OPDS catalog for Readest that searches and downloads from libgen.",
+  "author": "gxiang314",
+  "port": 8399,
+  "categories": ["media", "utilities"],
+  "description": "An OPDS 1.2 catalog that lets Readest and other OPDS readers search Library Genesis and download books directly. Searches expand Traditional/Simplified Chinese and partial titles, group each book's formats into one entry, and the root catalog offers Douban, Open Library and Taiwan bestseller lists. Includes a web UI with a download queue.",
+  "tipi_version": 1,
+  "version": "4.1.0",
+  "source": "https://github.com/gxiang314/cOPDSzlib",
+  "exposable": true,
+  "dynamic_config": true,
+  "supported_architectures": ["arm64", "amd64"],
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Username",
+      "hint": "HTTP Basic username for the OPDS feed, web UI and API",
+      "required": true,
+      "env_variable": "COPDS_USER"
+    },
+    {
+      "type": "password",
+      "label": "Password",
+      "hint": "HTTP Basic password; Readest asks for it when adding the catalog",
+      "required": true,
+      "min": 12,
+      "env_variable": "COPDS_PASS"
+    },
+    {
+      "type": "url",
+      "label": "Public base URL",
+      "hint": "Only when exposed on a domain over HTTPS, e.g. https://opds.example.com — feed links then use it. Leave empty for LAN use.",
+      "required": false,
+      "env_variable": "COPDS_BASE_URL"
+    },
+    {
+      "type": "text",
+      "label": "Recommendation sources",
+      "hint": "Comma-separated: douban, openlibrary, readmoo, kingstone, taaze. Empty means all; off disables them.",
+      "required": false,
+      "env_variable": "COPDS_RECOMMEND_SOURCES"
+    }
+  ],
+  "created_at": 1793234158001,
+  "updated_at": 1793234158001,
+  "min_tipi_version": "4.7.0"
+}
