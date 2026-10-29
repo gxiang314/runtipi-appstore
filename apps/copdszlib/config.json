@@ -8,7 +8,7 @@
   "port": 8399,
   "categories": ["media", "utilities"],
   "description": "An OPDS 1.2 catalog that lets Readest and other OPDS readers search Library Genesis and download books directly. Searches expand Traditional/Simplified Chinese and partial titles, group each book's formats into one entry, and the root catalog offers Douban, Open Library and Taiwan bestseller lists. Includes a web UI with a download queue.",
-  "tipi_version": 1,
+  "tipi_version": 2,
   "version": "4.1.0",
   "source": "https://github.com/gxiang314/cOPDSzlib",
   "exposable": true,
@@ -46,6 +46,6 @@
     }
   ],
   "created_at": 1793234158001,
-  "updated_at": 1793234158001,
+  "updated_at": 1793235991000,
   "min_tipi_version": "4.7.0"
 }
