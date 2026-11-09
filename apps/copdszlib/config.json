@@ -3,11 +3,11 @@
   "name": "cOPDSzlib",
   "id": "copdszlib",
   "available": true,
-  "short_desc": "OPDS catalog for Readest that searches and downloads from libgen.",
+  "short_desc": "OPDS catalog for Readest: search and download from libgen, with accounts, recommendation lists and Legado book sources.",
   "author": "gxiang314",
   "port": 8399,
   "categories": ["media", "utilities"],
-  "description": "An OPDS 1.2 catalog that lets Readest and other OPDS readers search Library Genesis and download books directly. Searches expand Traditional/Simplified Chinese and partial titles, group each book's formats into one entry, and the root catalog offers Douban, Open Library and Taiwan bestseller lists. Includes a web UI with a download queue.",
+  "description": "An OPDS 1.2 catalog that lets Readest and other OPDS readers search Library Genesis and download books directly. Searches expand Traditional/Simplified Chinese and partial titles and group each book's formats into one entry. The root catalog offers Douban, Open Library and Taiwan bestseller lists, and your own Legado book sources. The web UI has a download queue, user and app-password management, and an administrator page for environment settings.",
   "tipi_version": 3,
   "version": "latest",
   "source": "https://github.com/gxiang314/cOPDSzlib",
@@ -18,17 +18,24 @@
     {
       "type": "text",
       "label": "Username",
-      "hint": "HTTP Basic username for the OPDS feed, web UI and API",
+      "hint": "Name of the first administrator (web UI, OPDS feed and API). Its password is reset to the one below at every start, so it is also the recovery path.",
       "required": true,
       "env_variable": "COPDS_USER"
     },
     {
       "type": "password",
       "label": "Password",
-      "hint": "HTTP Basic password; Readest asks for it when adding the catalog",
+      "hint": "Administrator password; Readest asks for it when adding the catalog. Create further users in the web UI and give e-readers app passwords instead.",
       "required": true,
       "min": 12,
       "env_variable": "COPDS_PASS"
+    },
+    {
+      "type": "random",
+      "label": "Master key",
+      "min": 32,
+      "env_variable": "COPDS_MASTER_KEY",
+      "hint": "Generated once; encrypts secret settings stored in the database. Do not change it, or those settings become unreadable."
     },
     {
       "type": "url",
@@ -46,6 +53,6 @@
     }
   ],
   "created_at": 1793234158001,
-  "updated_at": 1793282716623,
+  "updated_at": 1794257135200,
   "min_tipi_version": "4.7.0"
 }

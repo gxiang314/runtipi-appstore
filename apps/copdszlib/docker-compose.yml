@@ -5,6 +5,7 @@ services:
     environment:
       - OPDS_USER=${COPDS_USER}
       - OPDS_PASS=${COPDS_PASS}
+      - MASTER_KEY=${COPDS_MASTER_KEY}
       - BASE_URL=${COPDS_BASE_URL}
       - RECOMMEND_SOURCES=${COPDS_RECOMMEND_SOURCES:-douban,openlibrary,readmoo,kingstone,taaze}
       - PORT=3000
