@@ -7,7 +7,7 @@
   "author": "gxiang314",
   "port": 8399,
   "categories": ["media", "utilities"],
-  "description": "An OPDS 1.2 catalog that lets Readest and other OPDS readers search Library Genesis and download books directly. Searches expand Traditional/Simplified Chinese and partial titles and group each book's formats into one entry. The root catalog offers Douban, Open Library and Taiwan bestseller lists, and your own Legado book sources. The web UI has a download queue, user and app-password management, and an administrator page for environment settings.",
+  "description": "An OPDS 1.2 catalog that lets Readest and other OPDS readers search Library Genesis and download books directly. Searches expand Traditional/Simplified Chinese and partial titles and group each book's formats into one entry. The root catalog offers Douban, Open Library and Taiwan bestseller lists, and your own Legado book sources (with covers). The web UI has a download queue, user and app-password management, and an administrator page for environment settings.",
   "tipi_version": 3,
   "version": "latest",
   "source": "https://github.com/gxiang314/cOPDSzlib",
@@ -53,6 +53,6 @@
     }
   ],
   "created_at": 1793234158001,
-  "updated_at": 1794257135200,
+  "updated_at": 1794259563812,
   "min_tipi_version": "4.7.0"
 }
