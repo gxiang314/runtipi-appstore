@@ -1,0 +1,46 @@
+{
+  "$schema": "../app-info-schema.json",
+  "name": "Headscale",
+  "id": "headscale",
+  "available": true,
+  "exposable": true,
+  "dynamic_config": true,
+  "port": 8296,
+  "short_desc": "Self-hosted Tailscale control server.",
+  "author": "juanfont",
+  "categories": ["network", "security"],
+  "description": "Open-source, self-hosted implementation of the Tailscale control server. Official Tailscale clients join your own tailnet with --login-server; no Tailscale account needed.",
+  "tipi_version": 1,
+  "version": "0.29.7",
+  "source": "https://github.com/juanfont/headscale",
+  "website": "https://headscale.net",
+  "supported_architectures": ["arm64", "amd64"],
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "MagicDNS base domain",
+      "env_variable": "HEADSCALE_BASE_DOMAIN",
+      "required": true,
+      "default": "ts.internal",
+      "hint": "Suffix for node names (node.ts.internal). Must not be the domain headscale itself is served on."
+    },
+    {
+      "type": "text",
+      "label": "Global DNS nameservers (space separated)",
+      "env_variable": "HEADSCALE_GLOBAL_NAMESERVERS",
+      "required": true,
+      "default": "1.1.1.1 1.0.0.1"
+    },
+    {
+      "type": "text",
+      "label": "DERP map URL",
+      "env_variable": "HEADSCALE_DERP_MAP_URL",
+      "required": true,
+      "default": "https://controlplane.tailscale.com/derpmap/default",
+      "hint": "Relay servers. The default uses Tailscale's public DERP relays (no account; traffic stays end-to-end encrypted)."
+    }
+  ],
+  "created_at": 1795084722060,
+  "updated_at": 1795084722060,
+  "min_tipi_version": "4.7.0"
+}
